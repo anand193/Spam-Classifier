@@ -1,4 +1,3 @@
-# Spam-Classifier
 # 📩 Spam Classifier
 
 A simple and efficient **Email/SMS Spam Classifier** built using **Python, Streamlit, and Machine Learning**. This app can predict whether a message is **spam** or **not spam** (ham) in real-time.  
@@ -38,7 +37,7 @@ A simple and efficient **Email/SMS Spam Classifier** built using **Python, Strea
 
 ## 🖥️ Demo
 
-![Streamlit Demo](demo_image.png)  
+![Streamlit Demo](spam.png)  
 
 ## 📈 Future Improvements
 - Add support for multiple languages.
