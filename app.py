@@ -2,11 +2,18 @@ import streamlit as st
 import pickle
 import string
 import nltk
-from nltk.corpus import stopwords 
+import os
+from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 
-nltk.download('punkt')
-nltk.download('stopwords')
+# ✅ Ensure nltk data is stored locally (fixes LookupError)
+nltk_data_dir = os.path.join(os.path.dirname(__file__), "nltk_data")
+if not os.path.exists(nltk_data_dir):
+    os.mkdir(nltk_data_dir)
+
+nltk.download('punkt', download_dir=nltk_data_dir)
+nltk.download('stopwords', download_dir=nltk_data_dir)
+nltk.data.path.append(nltk_data_dir)
 
 ps = PorterStemmer()
 stop_words = stopwords.words('english')
@@ -35,9 +42,11 @@ def transform_text(text):
     
     return ' '.join(y)
 
-tfidf = pickle.load(open('vectorizer.pkl','rb'))
-model = pickle.load(open('model.pkl','rb'))
+# Load model and vectorizer
+tfidf = pickle.load(open('vectorizer.pkl', 'rb'))
+model = pickle.load(open('model.pkl', 'rb'))
 
+# Streamlit UI
 st.title('📩 Email/SMS Spam Classifier')
 
 input_sms = st.text_area('Enter the message')
@@ -51,3 +60,4 @@ if st.button('Predict'):
         st.error('🚨 Spam')
     else:
         st.success('✅ Not Spam')
+
